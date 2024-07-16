@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Downloader</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Song Downloader</h1>
+        <form action="/download/" method="post">
+            <label for="song_name">Song Name:</label>
+            <input type="text" id="song_name" name="song_name" required>
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required>
+            <label for="codec">Codec:</label>
+            <button type="submit">Download</button>
+        </form>
+    </div>
+</body>
+</html>
