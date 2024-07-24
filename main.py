@@ -4,10 +4,7 @@ from fastapi.templating import Jinja2Templates
 from yt_dlp import YoutubeDL
 from youtubesearchpython import VideosSearch
 
-from fastapi.staticfiles import StaticFiles
-
 app = FastAPI()
-app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 def download_song(song_name, author, codec='mp3'):
@@ -35,7 +32,6 @@ def download_song(song_name, author, codec='mp3'):
         info_dict = ydl.extract_info(video_url, download=True)
         title = info_dict.get('title', None)
         file_path = f"{title}.{codec}"
-    
     return file_path
 
 @app.get("/", response_class=HTMLResponse)

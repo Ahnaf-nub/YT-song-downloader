@@ -4,16 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Song Downloader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2a2a58;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: rgb(35, 26, 61);
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0 0 10px rgb(167, 41, 240);
+            max-width: 400px;
+            width: 60%;
+            text-align: center;
+        }
+    
+        .container h1 {
+            text-align: center;
+            color: #fffefe;
+        }
+    
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .container label {
+            text-align: center;
+            margin-bottom: 18px;
+            color: #ffffff;
+        }
+    
+        .container input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #1b0404;
+            border-radius: 20px;
+        }
+
+        .container button {
+            padding: 12px;
+            margin-top: 10px;
+        }
+    
+        .container button {
+            padding: 20px 50px;
+            background-color: #19113ac0;
+            color: rgb(255, 255, 255);
+            border: 2px solid rgb(140, 155, 184);
+            border-radius: 20px;
+            cursor: pointer;
+        }
+    
+        .container button:hover {
+            background-color: #000000cb;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Song Downloader</h1>
         <form action="/download/" method="post">
             <label for="song_name">Song Name:</label>
-            <input type="text" id="song_name" name="song_name" required>
+            <input type="text" id="song_name" name="song_name" placeholder="Name of the song" required>
             <label for="author">Author:</label>
-            <input type="text" id="author" name="author" required>
-            <label for="codec">Codec:</label>
+            <input type="text" id="author" name="author" placeholder="Name of author" required>
             <button type="submit">Download</button>
         </form>
     </div>
