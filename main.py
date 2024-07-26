@@ -3,9 +3,11 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from yt_dlp import YoutubeDL
 from youtubesearchpython import VideosSearch
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 def download_song(song_name, author, codec='mp3'):
     query = f"{song_name} {author}"
