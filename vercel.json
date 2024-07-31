@@ -1,15 +1,18 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "main.py",
-        "use": "@vercel/python"
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python",
+      "config": {
+        "preinstall": "bash ffmpeg.sh"
       }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "main.py"
-      }
-    ]
-  }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app.py"
+    }
+  ]
+}
