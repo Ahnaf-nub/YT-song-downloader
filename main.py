@@ -1,5 +1,5 @@
-from fastapi import FastAPI, HTTPException, Request, Form
-from fastapi.responses import HTMLResponse, FileResponse
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from yt_dlp import YoutubeDL
 from youtubesearchpython import VideosSearch
@@ -9,7 +9,7 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-def download_song(song_name, author, codec='mp3') -> str:
+def download_song(song_name, author, codec='mp3'):
     query = f"{song_name} {author}"
     videos_search = VideosSearch(query, limit=1)
     result = videos_search.result()
@@ -41,16 +41,20 @@ async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 @app.post("/download/", response_class=HTMLResponse)
-async def download(request: Request, song_name: str = Form(...), author: str = Form(...), codec: str = Form('mp3')):
+async def download(request: Request):
+    form = await request.form()
+    song_name = form.get("song_name")
+    author = form.get("author")
+    codec = form.get("codec", "mp3")
     try:
         file_path = download_song(song_name, author, codec)
-        return FileResponse(file_path, media_type='application/octet-stream', filename=file_path)
+        return templates.TemplateResponse("result.html", {"request": request, "file_path": file_path})
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="127.0.0.1")
 
 
 
